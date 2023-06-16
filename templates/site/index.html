@@ -1,0 +1,448 @@
+{%extends 'site/basic.html'%}
+{%load static%}
+
+{%block title%}AG Consultancy Services{%endblock%}
+{%block head%}
+<!-- <link rel="stylesheet" href="{%static 'css/cards.css'%}"> -->
+<link rel="stylesheet" href="{%static 'css/homeslider.css'%}">
+<link rel="stylesheet" href="{%static 'css/home.css'%}">
+
+<link rel="stylesheet" href="{%static 'css/style.css'%}">
+<link rel="stylesheet" href="{%static 'css/profilecards.css'%}">
+<style>
+    .projects {
+        font-family: 'Times New Roman', Times, serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+
+    }
+
+    .card {
+        position: relative;
+        width: 300px;
+        height: 400px;
+        background: #fff;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .img-bx {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        transform: translateY(30px) scale(0.5);
+        transform-origin: top;
+    }
+
+    .img-bx img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-bottom: 30px;
+    }
+
+    .content .detail {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .content .detail h2 {
+        color: #444;
+        font-size: 1.6em;
+        font-weight: bolder;
+    }
+
+    .content .detail h2 span {
+        font-size: 0.7em;
+        color: #03a9f4;
+        font-weight: bold;
+    }
+
+    .sci {
+        position: relative;
+        display: flex;
+        margin-top: 5px;
+    }
+
+    .sci li {
+        list-style: none;
+        margin: 4px;
+    }
+
+    .sci li a {
+        width: 45px;
+        height: 45px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background: transparent;
+        font-size: 1.5em;
+        color: #444;
+        text-decoration: none;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        transition: 0.5s;
+    }
+
+    .sci li a:hover {
+        background: #03a9f4;
+        color: #fff;
+    }
+
+
+
+
+
+    .consultation-container {
+        display: flex;
+        height: 100vh;
+    }
+
+    .left {
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        animation-name: left;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-delay: 1s;
+        background-color: rgb(255, 255, 255);
+        border-color: #000;
+        border-style: solid;
+
+    }
+
+    .right {
+        flex: 1;
+        background-color: black;
+        transition: 1s;
+        background-image: url(https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+
+
+    .header>h2 {
+        margin: 0;
+        color: #4f46a5;
+    }
+
+    .header>h4 {
+        margin-top: 10px;
+        font-weight: normal;
+        font-size: 15px;
+        color: rgba(0, 0, 0, .4);
+    }
+
+    .form {
+        max-width: 80%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form>p {
+        text-align: right;
+    }
+
+    .form>p>a {
+        color: #000;
+        font-size: 14px;
+    }
+
+    .form-field {
+        height: 46px;
+        padding: 0 16px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        font-family: 'Rubik', sans-serif;
+        outline: 0;
+        transition: .2s;
+        margin-top: 20px;
+    }
+
+    .form-field:focus {
+        border-color: #0f7ef1;
+    }
+
+    .form>button {
+        padding: 12px 10px;
+        border: 0;
+        background: linear-gradient(to right, #de48b5 0%, #0097ff 100%);
+        border-radius: 3px;
+        margin-top: 10px;
+        color: #fff;
+        letter-spacing: 1px;
+        font-family: 'Rubik', sans-serif;
+    }
+
+    .animation {
+        animation-name: move;
+        animation-duration: .4s;
+        animation-fill-mode: both;
+        animation-delay: 2s;
+    }
+
+    .a1 {
+        animation-delay: 2s;
+    }
+
+    .a2 {
+        animation-delay: 2.1s;
+    }
+
+    .a3 {
+        animation-delay: 2.2s;
+    }
+
+    .a4 {
+        animation-delay: 2.3s;
+    }
+
+    .a5 {
+        animation-delay: 2.4s;
+    }
+
+    .a6 {
+        animation-delay: 2.5s;
+    }
+
+    @keyframes move {
+        0% {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-40px);
+        }
+
+        100% {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes left {
+        0% {
+            opacity: 0;
+            width: 0;
+        }
+
+        100% {
+            opacity: 1;
+            padding: 20px 40px;
+            width: 440px;
+        }
+    }
+</style>
+
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+{%endblock%}
+{%block body%}
+
+
+<div class="section-slider slider">
+    <div class="slider__slide slider__slide--active" data-slide="1">
+        <div class="slider__wrap">
+            <div class="slider__back"></div>
+        </div>
+        <div class="slider__inner">
+            <div class="slider__content">
+                <h3>Design Is Not Just What <br> It Looks Like And Feels Like.<br>Design Is How Works <br> <i
+                        class="author">Steve Jobs</i></h3><a class=" go-to-next">next</a>
+            </div>
+        </div>
+    </div>
+    <div class="slider__slide" data-slide="2">
+        <div class="slider__wrap">
+            <div class="slider__back"></div>
+        </div>
+        <div class="slider__inner">
+            <div class="slider__content">
+                <h3 class="">Science Is Decovering The Essential <br>Truths About What Exist In Universe<br>Engineering
+                    Is About Creating <br> Things that Never Existed
+                    <br> <i class="author">Elon Musk</i>
+                </h3><a class="go-to-next">next</a>
+            </div>
+        </div>
+    </div>
+    <div class="slider__slide" data-slide="3">
+        <div class="slider__wrap">
+            <div class="slider__back"></div>
+        </div>
+        <div class="slider__inner">
+            <div class="slider__content">
+                <h3 class="">Poetry and Computer Science <br> Have Driven My Dreams
+                    <br> <i class="author">Satya Nadella</i>
+                </h3><a class="go-to-next">next</a>
+            </div>
+        </div>
+    </div>
+    <div class="slider__indicators"></div>
+
+</div>
+
+
+<h3 class=section-slider" style="color:rgb(255, 255, 255) ;  text-align:center">My Self</h3>
+<div class="profile">
+    <div class="section-slider container mt-5 mb-5">
+        <div class="row no-gutters">
+            <div class="col-md-4 col-lg-4"><img src="{%static 'img/Owner.jpeg'%}"></div>
+            <div class="col-md-8 col-lg-8">
+                <div class="d-flex flex-column">
+                    <div class="d-flex flex-row justify-content-between align-items-center p-5  text-white">
+                        <h3 class="display-5">Ashutosh Giri</h3><i class="fa fa-facebook"></i><i
+                            class="fa fa-google"></i><i class="fa fa-youtube-play"></i><i class="fa fa-dribbble"></i><i
+                            class="fa fa-linkedin"></i>
+                    </div>
+                    <div class="p-3 bg-black text-white">
+                        <h6>Full Stack Developer</h6>
+                        <p>Hi there, I'm a freelance developer with a strong background in programming. I have a wealth
+                            of knowledge and experience in various programming languages, including Python, Django, CSS,
+                            JavaScript, and Flask. I have successfully completed various projects using these skills,
+                            demonstrating my ability to apply my knowledge in real-world situations. In addition to my
+                            expertise in these languages, I am also skilled in creating applications using a
+                            client-server model, including ReactJS, NodeJS, Firebase, Flutter, and Flutterflow.</p>
+                    </div>
+
+                    <div class="d-flex flex-row text-white">
+                        <div class="p-2 h-25 bg-primary text-center skill-block">
+                            <h4>90%</h4>
+                            <h6>Django</h6>
+                        </div>
+                        <div class="p-2 h-25 bg-success text-center skill-block">
+                            <h4>95%</h4>
+                            <h6>Python</h6>
+                        </div>
+                        <div class="p-2 h-25 bg-warning text-center skill-block">
+                            <h4>80%</h4>
+                            <h6>HTML</h6>
+                        </div>
+                        <div class="p-2 h-25 bg-danger text-center skill-block">
+                            <h4>75%</h4>
+                            <h6>PHP</h6>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h3 class="Heding" style="color:rgb(255, 255, 255) ; text-align:center">Projects</h3>
+
+{%for i in project%}
+<div class="section-slider projects"
+    style="background: linear-gradient({{i.Color}}, {{i.Color}} 45%, #fff 45%, #fff 100%);">
+    <div class="card">
+        <div class="img-bx">
+            <img src="media/{{i.Image}}" alt="img" />
+        </div>
+        <div class="content">
+            <div class="detail">
+                <h2>{{i.Title}}<br /><span>{{i.Category}}</span></h2>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endfor%}
+
+
+<div class="section-slider consultation-container">
+    <div class="left">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="header">
+                <h2 class="animation a1">Book Consultation</h2>
+                <h4 class="animation a2">The Consultation Charge Is 5$</h4>
+            </div>
+            <div class="form">
+                <input type="text" class="form-field animation a3" name="Name" placeholder="Name">
+                <input type="email" name="Email" class="form-field animation a3" placeholder="Email Address">
+                <input type="tel" class="form-field animation a3" name="Phone" placeholder="Phone">
+                <input name="Date_Time" type="datetime-local" class="form-field animation a4">
+
+                <button class="animation a6" type="submit">Book Appointment</button>
+            </div>
+        </form>
+    </div>
+    <div class="right" ></div>
+</div>
+<footer id="sticky-footer" class="section-slider flex-shrink-0 py-4 bg-dark text-white-50">
+    <div class="container text-center">
+        <small style="text-align: center;">AG Consultancy 2023</small>
+    </div>
+</footer>
+
+<script async="" defer=""
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAdeI1GITrMTHzndOwzKecdo9zbNFVNg4&amp;callback=initMap"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<script>
+    function initMap(){
+        map = new google.maps.Map(document.getElementById("map"), { center: new google.maps.LatLng(20.5937, 78.9629), zoom: 10, });
+    }
+
+        $(document).ready(function () {
+            for (var i = 1; i <= $(".slider__slide").length; i++) {
+                $(".slider__indicators").append(
+                    '<div class="slider__indicator" data-slide="' + i + '"></div>'
+                );
+            }
+            setTimeout(function () {
+                $(".slider__wrap").addClass("slider__wrap--hacked");
+            }, 1000);
+        });
+
+        function goToSlide(number) {
+            $(".slider__slide").removeClass("slider__slide--active");
+            $(".slider__slide[data-slide=" + number + "]").addClass(
+                "slider__slide--active"
+            );
+        }
+
+        $(".slider__next, .go-to-next").on("click", function () {
+            var currentSlide = Number($(".slider__slide--active").data("slide"));
+            var totalSlides = $(".slider__slide").length;
+            currentSlide++;
+            if (currentSlide > totalSlides) {
+                currentSlide = 1;
+            }
+            goToSlide(currentSlide);
+        });
+
+
+
+
+</script>
+
+{%endblock%}

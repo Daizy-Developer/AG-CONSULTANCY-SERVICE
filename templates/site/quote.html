@@ -1,0 +1,644 @@
+{%extends 'site/basic.html'%}
+{%load static%}
+
+{%block title%}GET QUOTATION{%endblock%}
+{%block head%}
+<!-- <link rel="stylesheet" href="{%static 'css/style.css'%}"> -->
+<style>
+    /* 64ac15 */
+    *,
+    *:before,
+    *:after {
+        box-sizing: border-box;
+    }
+
+    body {
+
+        background: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
+        /* background: linear-gradient(135deg, rgb(164, 0, 0), rgb(255, 247, 3), rgb(58, 11, 189)); */
+
+        background-size: 400% 400%;
+      
+      
+        animation: anim 5.5s infinite ease-in-out;
+        clip-path: polygon(
+                /* Top-left */
+                calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+
+                calc(100% - var(--border-width)) var(--border-width),
+
+                /* top-right */
+                calc(100% - var(--border-width)) var(--border-width),
+
+                calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * .5)),
+
+                /* bottom-right 1 */
+                calc(100% - calc(var(--curve-size) + var(--border-width) * .5)) calc(100% - var(--border-width)),
+
+                /* bottom-right 2 */
+                calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)) calc(100% - var(--border-width)));
+
+    }
+
+    .card {
+        /* margin-top: 10%; */
+        background: linear-gradient(135deg,
+
+                rgba(255, 255, 255, 0.1),
+
+                rgba(255, 255, 255, 0.1));
+
+        backdrop-filter: blur(21px);
+
+        -webkit-backdrop-filter: blur (21px);
+
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        margin-top: 30px;
+        border-radius: 24px;
+        height: 80vh;
+        width: 30vw;
+        padding: 48px;
+
+    }
+
+    @media(max-width:1280px) {
+
+        .card {
+            /* margin-top: 10%; */
+            background: linear-gradient(135deg,
+
+                    rgba(255, 255, 255, 0.1),
+
+                    rgba(255, 255, 255, 0.1));
+
+            backdrop-filter: blur(21px);
+
+            -webkit-backdrop-filter: blur (21px);
+
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            margin-top: 30px;
+            border-radius: 24px;
+            height: 80vh;
+            width: 50vw;
+            padding: 48px;
+
+        }
+
+    }
+
+    @media(max-width:750px) {
+
+        .card {
+            /* margin-top: 10%; */
+            background: linear-gradient(135deg,
+
+                    rgba(255, 255, 255, 0.1),
+
+                    rgba(255, 255, 255, 0.1));
+
+            backdrop-filter: blur(21px);
+
+            -webkit-backdrop-filter: blur (21px);
+
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            margin-top: 30px;
+            border-radius: 24px;
+            height: 80vh;
+            width: 100vw;
+            padding: 48px;
+
+        }
+
+    }
+
+    .card :where(h2, p) {
+
+        color: #ffffff;
+
+        text-align-last: center;
+
+        margin: 0;
+
+    }
+
+    .card h2 {
+        margin: 5%;
+        font-size: 48px;
+
+    }
+
+    .inputs {
+        margin-top: 5%;
+        margin-bottom: 5%;
+
+    }
+
+    .card p {
+
+        margin-top: 20px;
+
+        font-size: 16px;
+
+        color: #d1d1d1;
+        overflow: hidden;
+    }
+
+
+    @keyframes anim {
+
+        0% {
+
+            background-position: 0 50%;
+
+        }
+
+        50% {
+
+            background-position: 100% 50%;
+
+        }
+
+        100% {
+
+            background-position: 0 50%;
+
+        }
+
+    }
+
+    .wrapper {
+        perspective: 500px;
+        transform: rotatex(10deg);
+
+        margin: auto;
+        width: auto;
+    }
+
+    .submit {
+        display: block;
+        position: relative;
+        margin: 0.5em 0;
+        padding: 0.8em 2.2em;
+        cursor: pointer;
+        background: #FFFFFF;
+        border: none;
+        border-radius: 0.4em;
+        text-transform: uppercase;
+        font-size: 19px;
+        font-family: "Work Sans", sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        mix-blend-mode: color-dodge;
+        perspective: 500px;
+        transform-style: preserve-3d;
+        width: 100%;
+    }
+
+    .submit:before,
+    .submit:after {
+        --z: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        content: "";
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        mix-blend-mode: inherit;
+        border-radius: inherit;
+        transform-style: preserve-3d;
+        transform: translate3d(calc(var(--z) * 0px), calc(var(--z) * 0px), calc(var(--z) * 0px));
+    }
+
+    .submit span {
+        mix-blend-mode: none;
+        display: block;
+    }
+
+    .submit:after {
+        background-color: #5D00FF;
+    }
+
+    .submit:before {
+        background-color: #FF1731;
+    }
+
+    .submit:hover {
+        background-color: #FFF65B;
+        transition: background 0.3s 0.1s;
+    }
+
+    .submit:hover:before {
+        --z: 0.04;
+        animation: translateWobble 2.2s ease forwards;
+    }
+
+    .submit:hover:after {
+        --z: -0.06;
+        animation: translateWobble 2.2s ease forwards;
+    }
+
+
+    @keyframes translateWobble {
+        0% {
+            opacity: 0;
+            transform: translate3d(calc(var(--z) * 0px), calc(var(--z) * 0px), calc(var(--z) * 0px));
+        }
+
+        16% {
+            transform: translate3d(calc(var(--z) * 160px), calc(var(--z) * 160px), calc(var(--z) * 160px));
+        }
+
+        28% {
+            opacity: 1;
+            transform: translate3d(calc(var(--z) * 70px), calc(var(--z) * 70px), calc(var(--z) * 70px));
+        }
+
+        44% {
+            transform: translate3d(calc(var(--z) * 130px), calc(var(--z) * 130px), calc(var(--z) * 130px));
+        }
+
+        59% {
+            transform: translate3d(calc(var(--z) * 85px), calc(var(--z) * 85px), calc(var(--z) * 85px));
+        }
+
+        73% {
+            transform: translate3d(calc(var(--z) * 110px), calc(var(--z) * 110px), calc(var(--z) * 110px));
+        }
+
+        88% {
+            opacity: 1;
+            transform: translate3d(calc(var(--z) * 90px), calc(var(--z) * 90px), calc(var(--z) * 90px));
+        }
+
+        100% {
+            opacity: 1;
+            transform: translate3d(calc(var(--z) * 100px), calc(var(--z) * 100px), calc(var(--z) * 100px));
+        }
+    }
+
+    h4 {
+        color: #ffffff;
+    }
+
+    input,
+    input[type="radio"]+label,
+    input[type="checkbox"]+label:before,
+    select option,
+    select {
+        width: 100%;
+        padding: 1em;
+        line-height: 1.4;
+        background-color: #f9f9f9;
+        border: 1px solid #e5e5e5;
+        border-radius: 3px;
+        -webkit-transition: 0.35s ease-in-out;
+        -moz-transition: 0.35s ease-in-out;
+        -o-transition: 0.35s ease-in-out;
+        transition: 0.35s ease-in-out;
+        transition: all 0.35s ease-in-out;
+    }
+
+    input:focus {
+        outline: 0;
+        border-color: #bd8200;
+    }
+
+    input:focus+.input-icon i {
+        color: #f0a500;
+    }
+
+    input:focus+.input-icon:after {
+        border-right-color: #0b0b0b;
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    input[type="radio"]+label,
+    select {
+        display: inline-block;
+        width: 50%;
+        text-align: center;
+        float: left;
+        border-radius: 0;
+    }
+
+    input[type="radio"]+label:first-of-type {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+
+    input[type="radio"]+label:last-of-type {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+
+    input[type="radio"]+label i {
+        padding-right: 0.4em;
+    }
+
+    input[type="radio"]:checked+label,
+    input:checked+label:before,
+    select:focus,
+    select:active {
+        background-color: #000000;
+        color: #fff;
+        border-color: #000000;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    input[type="checkbox"]+label {
+        position: relative;
+        display: block;
+        padding-left: 1.6em;
+    }
+
+    input[type="checkbox"]+label:before {
+        position: absolute;
+        top: 0.2em;
+        left: 0;
+        display: block;
+        width: 1em;
+        height: 1em;
+        padding: 0;
+        content: "";
+    }
+
+    input[type="checkbox"]+label:after {
+        position: absolute;
+        top: 0.45em;
+        left: 0.2em;
+        font-size: 0.8em;
+        color: #fff;
+        opacity: 0;
+        font-family: FontAwesome;
+        content: "\f00c";
+    }
+
+    input:checked+label:after {
+        opacity: 1;
+    }
+
+    select {
+        height: 3.4em;
+        line-height: 2;
+    }
+
+    select:first-of-type {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
+
+    select:last-of-type {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+
+    select:focus,
+    select:active {
+        outline: 0;
+    }
+
+    select option {
+        background-color: #000000;
+        color: #fff;
+    }
+
+    .input-group {
+        margin-bottom: 1em;
+        zoom: 1;
+    }
+
+    .input-group:before,
+    .input-group:after {
+        content: "";
+        display: table;
+    }
+
+    .input-group:after {
+        clear: both;
+    }
+
+    .input-group-icon {
+        position: relative;
+    }
+
+    .input-group-icon input {
+        padding-left: 4.4em;
+    }
+
+    .input-group-icon .input-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3.4em;
+        height: 3.4em;
+        line-height: 3.4em;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    .input-group-icon .input-icon:after {
+        position: absolute;
+        top: 0.6em;
+        bottom: 0.6em;
+        left: 3.4em;
+        display: block;
+        border-right: 1px solid #e5e5e5;
+        content: "";
+        -webkit-transition: 0.35s ease-in-out;
+        -moz-transition: 0.35s ease-in-out;
+        -o-transition: 0.35s ease-in-out;
+        transition: 0.35s ease-in-out;
+        transition: all 0.35s ease-in-out;
+    }
+
+    .input-group-icon .input-icon i {
+        -webkit-transition: 0.35s ease-in-out;
+        -moz-transition: 0.35s ease-in-out;
+        -o-transition: 0.35s ease-in-out;
+        transition: 0.35s ease-in-out;
+        transition: all 0.35s ease-in-out;
+    }
+
+    .container {
+        max-width: 38em;
+        padding: 1em 3em 2em 3em;
+        margin: 0em auto;
+        /* background:  linear-gradient(175deg rgba(34, 255, 0, 0.964), rgb(255, 241, 241)); */
+        border-radius: 4.2px;
+        box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    .row {
+        zoom: 1;
+    }
+
+    .row:before,
+    .row:after {
+        content: "";
+        display: table;
+    }
+
+    .row:after {
+        clear: both;
+    }
+
+    .col-half {
+        padding-right: 10px;
+        float: left;
+        width: 50%;
+    }
+
+    .col-half:last-of-type {
+        padding-right: 0;
+    }
+
+    .col-third {
+        padding-right: 10px;
+        float: left;
+        width: 33.33333333%;
+    }
+
+    .col-third:last-of-type {
+        padding-right: 0;
+    }
+
+    textarea {
+        resize: none;
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 540px) {
+        .col-half {
+            width: 100%;
+            padding-right: 0;
+        }
+
+    }
+</style>
+{%endblock%}
+{%block body%}
+<h1 style="text-align:center;color:white">GET QUOTATION</h1>
+
+<div class="container">
+    <form action='' method="post" class='form'>
+        {% csrf_token %}
+        <div class="row">
+            <h4>Account</h4>
+            <div class="input-group input-group-icon">
+                <input type="text" id='name' name='name' required placeholder="Full Name" />
+                <div class="input-icon"><i class="fa fa-user"></i></div>
+            </div>
+            <div class="input-group input-group-icon">
+                <input type="email" id='email' name='email' placeholder="Email Adress" />
+                <div class="input-icon"><i class="fa fa-envelope"></i></div>
+            </div>
+            <div class="input-group input-group-icon">
+                <input type="tel" id='phone' name='phone' placeholder="Phone" />
+                <div class="input-icon"><i class="fa fa-envelope"></i></div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col">
+                <h4>Looking For</h4>
+                <div class="input-group">
+                    <input id="Website" type="radio" name="option" value="Website" />
+                    <label for="Website">Website</label>
+
+                    <input id="Application" type="radio" name="option" value="Application" />
+                    <label for="Application">Application</label>
+
+                    <input id="Fixing" type="radio" name="option" value="Bug_Fixing" />
+                    <label for="Fixing">Bug Fixing</label>
+                    <input id="Other" type="radio" name="option" value="Other" />
+                    <label for="Other">Other Stuffs</label>
+
+                </div>
+            </div>
+        </div>
+        <h4 class='label' for='about'>Tell Us Little Bit About Project</h4>
+        <textarea class='' cols='50' id='about' name='about' placeholder="Tell Us Little Bit About Project" rows='4'></textarea>
+        <button class="submit" type="submit">Get Qoute</button>
+
+    </form>
+</div>
+<!-- <form action='' method="post" class='form'>
+            {% csrf_token %}
+            <p class='field required'>
+                <label class='label required' for='name'>Name</label>
+                <input class='text-input' id='name' name='name' required type='text' value='Full Name'>
+            </p>
+            <p class='field required half'>
+                <label class='label' for='email'>E-mail</label>
+                <input class='text-input' id='email' name='email' required type='email'>
+            </p>
+            <p class='field half'>
+                <label class='label' for='phone'>Phone</label>
+                <input class='text-input' id='phone' name='phone' type='phone'>
+            </p>
+            
+      
+            <div class='field'>
+                <label class='label'>Looking For :-</label>
+                <ul class='options'>
+                    <li class='option'>
+                        <input class='option-input' id='option-0' name='option' type='radio' value='0'>
+                        <label class='option-label' for='option-0'>Website</label>
+                    </li>
+                    <li class='option'>
+                        <input class='option-input' id='option-1' name='option' type='radio' value='1'>
+                        <label class='option-label' for='option-1'>Android Application</label>
+                    </li>
+                    <li class='option'>
+                        <input class='option-input' id='option-2' name='option' type='radio' value='2'>
+                        <label class='option-label' for='option-2'>Ios Application</label>
+                    </li>
+                    <li class='option'>
+                        <input class='option-input' id='option-3' name='option' type='radio' value='3'>
+                        <label class='option-label' for='option-3'>Hybrid Application</label>
+                    </li>
+                    <li class='option'>
+                        <input class='option-input' id='option-4' name='option' type='radio' value='4'>
+                        <label class='option-label' for='option-4'>Pc Softwares</label>
+                    </li>
+                    <li class='option'>
+                        <input class='option-input' id='option-5' name='option' type='radio' value='5'>
+                        <label class='option-label' for='option-5'>Maintenance</label>
+                    </li>
+                    <li class='option'>
+                        <input class='option-input' id='option-6' name='option' type='radio' value='6'>
+                        <label class='option-label' for='option-6'>Code & Bug Fixing</label>
+                    </li>
+                    <li class='option'>
+                        <input class='option-input' id='option-7' name='option' type='radio' value='7'>
+                        <label class='option-label' for='option-7'>Other Stuffs</label>
+                    </li>
+                </ul>
+            </div>
+            <p class='field'>
+                <label class='label' for='about'>Tell Us Little Bit About Project</label>
+                <textarea class='textarea' cols='50' id='about' name='about' rows='4'></textarea>
+            </p>
+          
+          
+            <p class='field half'>
+                <input class='button' type='submit' value='Send'>
+            </p>
+
+        </form> -->
+<script>
+
+</script>
+{%endblock%}
